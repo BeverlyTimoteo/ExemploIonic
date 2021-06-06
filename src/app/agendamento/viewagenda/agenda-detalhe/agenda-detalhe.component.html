@@ -1,0 +1,87 @@
+<ion-toolbar>
+  <ion-buttons (click)="fechar()" slot="end">
+    <ion-icon ios="close-outline" md="close-sharp"></ion-icon>
+  </ion-buttons>
+  <ion-title>Detalhes Agendamento</ion-title>
+</ion-toolbar>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-img [src]="imagem"></ion-img>
+      <ion-card-subtitle color="success" *ngIf="evento.descricao_evento">{{ evento.descricao_evento }}
+      </ion-card-subtitle>
+      <ion-card-title>{{ evento.cliente }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label position="floating">Data</ion-label>
+            <ion-input disabled readonly value="{{ evento.inicio | date:'dd/MM/yyyy' }}"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-label position="floating">Início</ion-label>
+            <ion-input disabled readonly value="{{ evento.inicio | date:'h:mm a' }}"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-label position="floating">Término</ion-label>
+            <ion-input disabled readonly value="{{ evento.termino | date:'h:mm a' }}"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="evento.telefone || evento.celular">
+          <ion-col *ngIf="evento.telefone">
+            <ion-label position="floating">Telefone</ion-label>
+            <ion-input disabled readonly value="{{ evento.telefone }}"></ion-input>
+          </ion-col>
+          <ion-col *ngIf="evento.celular">
+            <ion-label position="floating">Celular</ion-label>
+            <ion-input disabled readonly value="{{ evento.celular }}"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="evento.animal || evento.atendente">
+          <ion-col *ngIf="evento.animal && evento.animal !== ''">
+            <ion-label position="floating">Animal</ion-label>
+            <ion-input disabled readonly value="{{ evento.animal }}"></ion-input>
+          </ion-col>
+          <ion-col *ngIf="evento.atendente && evento.atendente !== ''">
+            <ion-label position="floating">Atendente</ion-label>
+            <ion-input disabled readonly value="{{ evento.atendente }}"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="evento.observacao_evento">
+          <ion-col>
+            <ion-label position="floating">Observação</ion-label>
+            <ion-textarea disabled readonly [rows]="getTamanho(evento.observacao_evento)"
+              value="{{ evento.observacao_evento }}"></ion-textarea>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="evento.empresa || evento.agenda">
+          <ion-col>
+            <ion-label position="floating">Agenda</ion-label>
+            <ion-input disabled readonly value="{{ evento.agenda }}"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-label position="floating">Empresa</ion-label>
+            <ion-input disabled readonly value="{{ evento.empresa }}"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label position="floating">Logradouro</ion-label>
+            <ion-input disabled readonly value="{{ evento.logradouro }}"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label position="floating">Bairro</ion-label>
+            <ion-input disabled readonly value="{{ evento.bairro }}"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-label position="floating">Cidade</ion-label>
+            <ion-input disabled readonly value="{{ evento.cidade + ' - ' + evento.uf }}"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
